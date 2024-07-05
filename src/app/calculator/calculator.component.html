@@ -1,0 +1,62 @@
+<div class="calculator" [ngClass]="{ 'dark-mode': isDarkMode }">
+    <div class="theme-button">
+      <img [src]="isDarkMode ? 'https://static-00.iconduck.com/assets.00/mode-light-icon-2048x2048-17p1ch4x.png' : 'https://cdn.iconscout.com/icon/premium/png-256-thumb/dark-mode-5156594-4302736.png'" width="30" height="30" (click)="toggleDarkMode()">
+    </div>
+  
+    <div class="history-button">
+      <img [src]="isDarkMode ? 'https://cdn-icons-png.flaticon.com/256/7420/7420772.png' : 'https://cdn1.iconfinder.com/data/icons/material-core/21/history-512.png'" width="25" height="25" (click)="toggleHistoryPanel()">
+    </div>
+  
+    <div class="operation">
+      <span>{{ displayOperation }}</span>
+    </div>
+  
+    <div class="display">
+      <input type="text" [value]="displayValue" readonly>
+    </div>
+  
+    <div class="keypadover">
+      <div class="keypad">
+  
+        <div class="red-box horizontal-buttons">
+          <button (click)="clear()">AC</button>
+          <button (click)="toggleSign()">+/-</button>
+          <button (click)="percentage()">%</button>
+        </div>
+  
+        <div class="red-box vertical-buttons">
+          <button (click)="setOperator('/')">÷</button>
+          <button (click)="setOperator('*')">×</button>
+          <button (click)="setOperator('-')">-</button>
+          <button (click)="setOperator('+')">+</button>
+          <button class="equals-button" (click)="calculate()">=</button>
+          </div>
+  
+        <div class="number-buttons">
+          <button (click)="appendNumber(1)">1</button>
+          <button (click)="appendNumber(2)">2</button>
+          <button (click)="appendNumber(3)">3</button>
+          <button (click)="appendNumber(4)">4</button>
+          <button (click)="appendNumber(5)">5</button>
+          <button (click)="appendNumber(6)">6</button>
+          <button (click)="appendNumber(7)">7</button>
+          <button (click)="appendNumber(8)">8</button>
+          <button (click)="appendNumber(9)">9</button>
+          <button (click)="appendNumber('.')">.</button>
+          <button (click)="appendNumber(0)">0</button>
+          <button (click)="appendNumber('00')">00</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="showHistory" class="history-overlay">
+    <div class="history-panel">
+      <button class="close-button" (click)="toggleHistoryPanel()">×</button>
+      <h3>HISTORY</h3>
+      <ul>
+        <li *ngFor="let historyItem of history">{{ historyItem }}</li>
+      </ul>
+    </div>
+  </div>
+  

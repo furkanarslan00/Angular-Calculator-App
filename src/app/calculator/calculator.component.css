@@ -1,0 +1,347 @@
+.calculator {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    margin: 60px auto 0; 
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+  }
+
+/*******************************************************************************************/
+  
+  .history-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+  
+  .history-panel {
+    background-color: #3081b7;
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .history-panel h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #000000;
+  }
+  
+  .history-panel ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .history-panel li {
+    background-color:#1c538b;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .history-panel .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .history-panel .close-button:hover {
+    background-color: #bbb;
+  }
+  
+
+  .history-button:hover {
+    background-color: #eee;
+  }
+  
+  /*******************************************************************************************/
+
+  .result,
+  .operation {
+    padding: 10px;
+    margin-bottom: 0px;
+    border: 0px solid;
+    border-radius: 5px;
+    font-size: 1.2em;
+    text-align: right;
+    margin-top: 150px;
+    height: 25px;
+    color: #908888;
+  }
+  
+  .display {
+    margin-bottom: 20px;
+    height: 25px;
+    width: 100%;
+    position: left;
+  }
+  
+  .display input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
+    text-align: right;
+    border: 0px solid;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 27px;
+  }
+  
+  .keypadover {
+    background: linear-gradient(to right, #b3e0ff, #66b3ff); 
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 25px; 
+    margin-left: -20px; 
+    margin-bottom: -20px; 
+    width: calc(100% + 0px); 
+    margin-top: 35px;
+  }
+  
+  
+  .keypad {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .horizontal-buttons {
+    display: inline-flex;
+    gap: 18px;
+    justify-content: flex-start; 
+    margin-right: 70px; 
+  }
+  
+  
+  .vertical-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: flex-start; 
+    align-items: flex-end; 
+    margin-left: 200px; 
+    margin-top: -70px; 
+    
+  }
+  
+  .red-box {
+    background-color: #badff8;
+    padding: 0px;
+    border-radius: 30px;
+    width: fit-content;
+  }
+  
+  .number-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    justify-content: center;
+    margin-top: -270px; 
+    margin-right: 70px; 
+  }
+  
+  .keypad button {
+    padding: 15px;
+    font-size: 1.2em;
+    border: 1px solid #b3e0ff;
+    border-radius: 50%; 
+    background-color: #badff8;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50px; 
+    height: 50px; 
+    display: inline-block; 
+    font-weight: bold;
+  }
+  
+  .keypad button:hover {
+    background-color: #66b3ff; 
+  }
+  
+  .keypad button:nth-child(1),
+  .keypad button:nth-child(2) {
+    padding-left: 2px; 
+    padding-right: 2px; 
+  }
+
+ /*******************************************************************************************/
+ 
+  
+  .history-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .history-button:hover {
+    background-color: #c6c1c1;
+  }
+  
+  .history-panel .close-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+    color: #ffffff;
+    background-color: #66b3ff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .history-panel .close-button:hover {
+    background-color: #cc0923;
+  }
+  
+  .history-button {
+    border: none; 
+    background: none; 
+    padding: 0; 
+    margin-top: 20px;
+    margin-right: 15px;
+  }
+  
+  .theme-button {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .theme-button img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+  }
+  
+  .theme-button:hover img {
+    transform: scale(1.1) rotate(360deg);
+  }
+
+  /*******************************************************************************************/
+
+  .calculator.dark-mode {
+    background-color: #000000; 
+  }
+  
+  .calculator.dark-mode .result,
+  .calculator.dark-mode .operation {
+    color: #d0c9c9; 
+  }
+  
+  .calculator.dark-mode .display input {
+    color: #ffffff; 
+    background-color: #000000; 
+  }
+  
+  .calculator.dark-mode .keypad button {
+    background-color: #0e2a46; 
+    color: #ffffff; 
+    border: 1px solid #0e2a46;
+  }
+  
+  .calculator.dark-mode .red-box {
+    background-color: #0e2a46; 
+  }
+  
+  
+  .calculator.dark-mode .keypad button:hover {
+    background-color: #083573; 
+  }
+  
+  
+  .calculator.dark-mode .keypadover {
+    background: linear-gradient(to right, #1b1b1c, #0b4664); 
+  }
+  
+  .calculator.dark-mode .history-button {
+    color: #000000; 
+  }
+  
+  .calculator.dark-mode .history-button:hover {
+    background-color: #cccccc; 
+  }
+  
+  /*******************************************************************************************/
+
+  .history-panel .close-button {
+    background-color: #ffffff;
+    color: #000000; 
+  }
+  
+  .history-panel .close-button:hover {
+    background-color: #cc0923; 
+  }
+  
+  .history-panel .close-button {
+    background-color: #ffffff; 
+    color: #000000; 
+  }
+  
+  .history-panel .close-button:hover {
+    background-color: #cc0923; 
+  }
+  
+  .keypad button.equals-button {
+    position: relative; 
+    top: 7px; 
+    background-color: #a1cef4;
+  }
+  
+  .keypad button.equals-button:hover {
+    background-color: #66b3ff; 
+  }
+  
+  /*******************************************************************************************/
+
+  .calculator.dark-mode .keypad button.equals-button{
+    background-color: #0c161e;
+  }
+  
+  .calculator.dark-mode .keypad button.equals-button:hover{
+    background-color: #083573; 
+  }

@@ -36,6 +36,11 @@ export class CalculatorComponent {
   }
 
   setOperator(op: string) {
+    if (this.currentInput.endsWith(' ') && this.currentInput.length > 2) {
+      this.currentInput = this.currentInput.slice(0, -3); 
+      this.displayOperation = this.displayOperation.slice(0, -3); 
+    }
+    
     let displayOp = op;
     if (op === '/') {
       displayOp = '÷';
@@ -43,11 +48,16 @@ export class CalculatorComponent {
       displayOp = '×';
     }
   
-    if (this.currentInput !== '') {
+    if (this.currentInput.endsWith(' + ') || this.currentInput.endsWith(' - ') ||
+        this.currentInput.endsWith(' * ') || this.currentInput.endsWith(' / ')) {
+      this.currentInput = this.currentInput.slice(0, -3) + ` ${op} `;
+      this.displayOperation = this.displayOperation.slice(0, -3) + ` ${displayOp} `;
+    } else if (this.currentInput !== '') {
       this.currentInput += ` ${op} `;
       this.displayOperation += ` ${displayOp} `;
     }
   }
+  
 
   clear() {
     this.currentInput = '';

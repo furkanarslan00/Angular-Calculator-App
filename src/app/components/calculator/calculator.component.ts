@@ -5,12 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.css'],
 })
-
-/*******************************************************************************************/
 export class CalculatorComponent {
   title = 'Hesap Makinesi';
-  currentInput: string = '';
-  displayOperation: string = '';
+  currentInput: string = '0';
+  displayOperation: string = '0';
   result: number | null = null;
   history: string[] = [];
   showHistory: boolean = false;
@@ -29,44 +27,46 @@ export class CalculatorComponent {
     }
     return '';
   }
-  
+
   appendNumber(num: number | string) {
-    this.currentInput += num.toString();
-    this.displayOperation += num.toString();
+    if (this.currentInput === '0') {
+      if (num === '.') {
+        this.currentInput = '0.';
+        this.displayOperation = '0.';
+      } else if (num === '00') {
+        return; 
+      } else {
+        this.currentInput = num.toString();
+        this.displayOperation = num.toString();
+      }
+    } else {
+      this.currentInput += num.toString();
+      this.displayOperation += num.toString();
+    }
   }
 
   setOperator(op: string) {
-    if (this.currentInput.endsWith(' ') && this.currentInput.length > 2) {
-      this.currentInput = this.currentInput.slice(0, -3); 
-      this.displayOperation = this.displayOperation.slice(0, -3); 
-    }
-    
     let displayOp = op;
     if (op === '/') {
       displayOp = '÷';
     } else if (op === '*') {
       displayOp = '×';
     }
-  
-    if (this.currentInput.endsWith(' + ') || this.currentInput.endsWith(' - ') ||
-        this.currentInput.endsWith(' * ') || this.currentInput.endsWith(' / ')) {
-      this.currentInput = this.currentInput.slice(0, -3) + ` ${op} `;
-      this.displayOperation = this.displayOperation.slice(0, -3) + ` ${displayOp} `;
-    } else if (this.currentInput !== '') {
+
+    if (this.currentInput !== '' && !this.currentInput.endsWith(' ')) {
       this.currentInput += ` ${op} `;
       this.displayOperation += ` ${displayOp} `;
     }
   }
-  
 
   clear() {
-    this.currentInput = '';
-    this.displayOperation = '';
+    this.currentInput = '0';
+    this.displayOperation = '0';
     this.result = null;
   }
 
   toggleSign() {
-    if (this.currentInput !== '') {
+    if (this.currentInput !== '' && this.currentInput !== '0') {
       let num = parseFloat(this.currentInput);
       this.currentInput = String(-num);
       this.displayOperation = this.currentInput;
@@ -74,7 +74,7 @@ export class CalculatorComponent {
   }
 
   percentage() {
-    if (this.currentInput !== '') {
+    if (this.currentInput !== '' && this.currentInput !== '0') {
       let num = parseFloat(this.currentInput);
       this.currentInput = String(num / 100);
       this.displayOperation = this.currentInput;
@@ -84,6 +84,11 @@ export class CalculatorComponent {
   calculate() {
     if (this.currentInput !== '') {
       try {
+        if (this.currentInput.includes('/ 0')) {
+          console.error('Division by zero is not allowed');
+          return; 
+        }
+
         const result = eval(this.currentInput);
         if (typeof result === 'number' && !isNaN(result)) {
           this.result = result;
@@ -97,7 +102,6 @@ export class CalculatorComponent {
       }
     }
   }
-  
 
   toggleHistoryPanel() {
     this.showHistory = !this.showHistory;

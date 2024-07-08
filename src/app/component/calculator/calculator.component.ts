@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./calculator.component.css'],
 })
 
-
 /*******************************************************************************************/
 export class CalculatorComponent {
   title = 'Hesap Makinesi';
